@@ -1,0 +1,109 @@
+/*
+Task 1: Create a Basic CSS Grid Layout Start by designing a simple web page layout using CSS Grid. Your layout should include a header, a main content area divided into two columns (for content and sidebar), and a footer. Define the grid container and set up the grid template areas.
+
+Expected Outcome: A web page with a CSS Grid-based layout, featuring a header, a two-column main content area, and a footer.
+
+Task 2: Implement Responsive Design Using CSS Grid Modify your CSS Grid layout to be responsive. Use media queries to change the layout for smaller screens by stacking the content and sidebar vertically instead of horizontally.
+
+Expected Outcome: The layout changes to a single-column format on screens narrower than 768 pixels, stacking the header, content, sidebar, and footer vertically.
+
+Task 3: Advanced Grid Layout with Template Columns and Rows Enhance your grid layout by specifying the size of columns and rows using the grid-template-columns and grid-template-rows properties. Experiment with fractional units (fr) and fixed sizes (e.g., pixels) to create a balanced layout.
+
+Expected Outcome: A more refined layout where the main content area is larger than the sidebar on wider screens, with responsive adjustments for smaller devices.
+
+*/
+
+
+.container {
+    display: grid;
+    /* 2 columns 1st is 2fr | 2nd is 1fr */
+    /*
+      frs are fractions, they add up to 100%
+      in this case 1fr is 25% and 2fr is 50%
+    */
+    grid-template-columns: 1fr 250px;
+    /* 3 rows 1st is 200px | 2nd is 300px | 3rd is 150px*/
+    grid-template-rows: 200px 300px 150px;
+    gap: 10px;
+    margin: 0 auto; /* sometimes centers stuff*/
+    width: 80%;
+    border: 2px solid black;
+  }
+  
+  .header {
+    grid-column-start: 1;
+    grid-column-end: 3; /* 2rd column always one more */
+    grid-row-start: 1;
+    grid-row-end: 2; /* end on row 1 */
+    border: 2px solid black;
+    background-color: azure;
+  }
+  
+  .mid_main {
+    grid-column: 1 / 2; /* starts at 1 ends at 2 */
+    grid-row: 2 / 3; /* starts on row 2 ends at 2 */
+    border: 2px solid black;
+    background-color:crimson;
+  }
+
+  .mid_sidebar {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    border: 2px solid black;
+    background-color:wheat;
+  }
+  
+  .footer {
+    grid-column: 1 / span 2;
+    grid-row: 3 / 4;
+    border: 2px solid black;
+    background-color:tomato;
+    /*
+    display:none; removed from the page
+    opacity: 0; is invisible but still there
+    */
+  }
+  
+  /* break point */
+  @media screen and (max-width: 600px){
+    .container {
+      display: grid;
+      grid-template-columns: 100%;
+      grid-template-rows: 150px 125px 125px 100px;
+      gap: 5px;
+      width: 95%;
+      grid-template-areas:
+        "header"
+        "mid_main"
+        "mid_sidebar"
+        "footer";
+    }
+  
+    .header {
+      /* grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 1;
+      grid-row-end: 2; */
+      grid-area: header;
+    }
+  
+    .mid_main {
+      /* grid-column: 1 / 2;
+      grid-row: 2 / 3; */
+      grid-area: mid_main;
+    }
+  
+    .mid_sidebar {
+      /* grid-column: 1 / 2;
+      grid-row: 3 / 4; */
+      grid-area: mid_sidebar;
+    }
+  
+    .footer {
+      /* grid-column: 1 / 2;
+      grid-row: 4 / 5; */
+      grid-area: footer;
+    }
+  } /* closing media query bracket */
+  
+  
